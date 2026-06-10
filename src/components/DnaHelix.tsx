@@ -78,6 +78,8 @@ function Helix({
         clearcoatRoughness: 0.06,
         emissive: new THREE.Color("#7a521a"),
         emissiveIntensity: 0.35,
+        transparent: true,
+        opacity: 0.3,
       }),
     [],
   );
@@ -91,6 +93,8 @@ function Helix({
         clearcoatRoughness: 0.08,
         emissive: new THREE.Color("#0e2350"),
         emissiveIntensity: 0.3,
+        transparent: true,
+        opacity: 0.3,
       }),
     [],
   );
@@ -102,6 +106,8 @@ function Helix({
         roughness: 0.3,
         emissive: new THREE.Color("#5a3d10"),
         emissiveIntensity: 0.25,
+        transparent: true,
+        opacity: 0.35,
       }),
     [],
   );
@@ -113,6 +119,8 @@ function Helix({
         roughness: 0.35,
         emissive: new THREE.Color("#1a2a55"),
         emissiveIntensity: 0.25,
+        transparent: true,
+        opacity: 0.35,
       }),
     [],
   );
