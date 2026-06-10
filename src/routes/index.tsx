@@ -265,7 +265,7 @@ function ExpertiseSection() {
               key={it.t}
               initial="hidden" whileInView="show" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp} custom={i}
-              className="group glass rounded-2xl p-8 relative overflow-hidden hover:bg-muted transition"
+              className="group glass rounded-2xl p-8 relative overflow-hidden hover:bg-white/85 transition"
             >
               <div className="absolute -top-20 -right-20 size-40 rounded-full bg-gold/15 blur-3xl opacity-0 group-hover:opacity-100 transition" />
               <div className="font-mono text-xs gold-text">0{i + 1}</div>
@@ -309,7 +309,7 @@ function ResearchSection() {
               <motion.a
                 href="#" key={p.t}
                 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={i}
-                className="group glass rounded-2xl p-6 flex items-center gap-6 hover:bg-muted transition"
+                className="group glass rounded-2xl p-6 flex items-center gap-6 hover:bg-white/85 transition"
               >
                 <div className="size-14 rounded-xl bg-gradient-to-br from-gold/30 to-helix-b/30 flex items-center justify-center font-mono text-[10px]">
                   PDF
