@@ -93,7 +93,7 @@ function StickyHelix({ scrollRef }: { scrollRef: { current: number } }) {
     <div className="fixed inset-0 pointer-events-none z-0">
       {/* Soft glass tint so the helix sits "inside" a glass column */}
       <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[min(900px,90vw)] rounded-[3rem]
-        bg-white/30 backdrop-blur-[2px] border border-foreground/5 shadow-[0_30px_120px_-40px_rgba(0,0,0,0.25)]" />
+        bg-white/5 backdrop-blur-[2px] border border-foreground/10 shadow-[0_30px_120px_-40px_rgba(0,0,0,0.60)]" />
       <div className="absolute inset-0 opacity-95">
         <Suspense fallback={null}>
           <DnaHelix className="h-full w-full" scrollProgress={scrollRef} />
