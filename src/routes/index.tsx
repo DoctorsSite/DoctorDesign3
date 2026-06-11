@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import doctorPortrait from "@/assets/doctor-portrait.jpg";
 import edu1 from "@/assets/edu-1.jpg";
 import edu2 from "@/assets/edu-2.jpg";
@@ -42,24 +43,75 @@ const fadeUp = {
 };
 
 function Nav() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navLinks = [
+    { href: "#foundation", label: "Foundation" },
+    { href: "#expertise", label: "Expertise" },
+    { href: "#impact", label: "Impact" },
+    { href: "#consult", label: "Consult" },
+  ];
   return (
-    <header className="fixed top-0 inset-x-0 z-50">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-5 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-2 text-sm tracking-[0.2em] uppercase">
-          <span className="inline-block size-1.5 rounded-full bg-gold" />
-          <span className="font-display text-base">Dr. Arjun Rao</span>
-        </a>
-        <nav className="hidden md:flex items-center gap-8 text-xs tracking-[0.18em] uppercase text-muted-foreground">
-          <a href="#foundation" className="hover:text-foreground transition">Foundation</a>
-          <a href="#expertise" className="hover:text-foreground transition">Expertise</a>
-          <a href="#impact" className="hover:text-foreground transition">Impact</a>
-          <a href="#consult" className="hover:text-foreground transition">Consult</a>
-        </nav>
-        <a href="#consult" className="text-xs tracking-[0.2em] uppercase px-4 py-2.5 rounded-full glass hover:bg-gold/15 transition">
-          Book Consultation
-        </a>
-      </div>
-    </header>
+    <>
+      <header className="fixed top-0 inset-x-0 z-50">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10 py-5 flex items-center justify-between">
+          <a href="#top" className="flex items-center gap-2 text-sm tracking-[0.2em] uppercase">
+            <span className="inline-block size-1.5 rounded-full bg-gold" />
+            <span className="font-display text-base">Dr. Arjun Rao</span>
+          </a>
+          <nav className="hidden md:flex items-center gap-8 text-xs tracking-[0.18em] uppercase text-muted-foreground">
+            {navLinks.map((l) => (
+              <a key={l.href} href={l.href} className="hover:text-foreground transition">{l.label}</a>
+            ))}
+          </nav>
+          <div className="flex items-center gap-3">
+            <a href="#consult" className="hidden md:inline-flex text-xs tracking-[0.2em] uppercase px-4 py-2.5 rounded-full glass hover:bg-gold/15 transition">
+              Book Consultation
+            </a>
+            <button
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open menu"
+              className="md:hidden rounded-full glass p-2.5 text-muted-foreground hover:text-foreground transition"
+            >
+              <Menu size={18} />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile menu overlay */}
+      {menuOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 z-[60] bg-background/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-10 md:hidden"
+        >
+          <button
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+            className="absolute top-5 right-6 rounded-full glass p-2.5 text-muted-foreground hover:text-foreground transition"
+          >
+            <X size={18} />
+          </button>
+          {navLinks.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={() => setMenuOpen(false)}
+              className="font-display text-2xl tracking-[0.2em] uppercase text-foreground/80 hover:text-foreground transition"
+            >
+              {l.label}
+            </a>
+          ))}
+          <a
+            href="#consult"
+            onClick={() => setMenuOpen(false)}
+            className="mt-4 text-sm tracking-[0.2em] uppercase px-8 py-3.5 rounded-full glass hover:bg-gold/15 transition gold-text"
+          >
+            Book Consultation
+          </a>
+        </motion.div>
+      )}
+    </>
   );
 }
 
@@ -92,7 +144,7 @@ function StickyHelix({ scrollRef }: { scrollRef: { current: number } }) {
   return (
     <div className="fixed inset-0 pointer-events-none z-0">
       {/* Soft glass tint so the helix sits "inside" a glass column */}
-      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[min(900px,90vw)] rounded-[3rem]
+      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[min(900px,90vw)] rounded-[1.5rem] md:rounded-[3rem]
         bg-white/5 backdrop-blur-[2px] border border-foreground/10 shadow-[0_30px_120px_-40px_rgba(0,0,0,0.60)]" />
       <div className="absolute inset-0 opacity-95">
         <Suspense fallback={null}>
@@ -110,31 +162,31 @@ function Hero() {
   const y = useTransform(scrollYProgress, [0, 0.2], [0, -60]);
   const opacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   return (
-    <section id="top" className="relative min-h-screen flex items-center pt-32 pb-20 px-6 lg:px-10">
-      <motion.div style={{ y, opacity }} className="mx-auto max-w-7xl w-full grid lg:grid-cols-12 gap-10 items-center">
-        <div className="lg:col-span-7">
-          <motion.div initial="hidden" animate="show" variants={fadeUp} className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6">
-            <span className="gold-text">The DNA of Excellence</span>
+    <section id=”top” className=”relative min-h-screen flex items-center pt-28 pb-20 px-6 lg:px-10”>
+      <motion.div style={{ y, opacity }} className=”mx-auto max-w-7xl w-full grid lg:grid-cols-12 gap-8 lg:gap-10 items-center”>
+        <div className=”lg:col-span-7”>
+          <motion.div initial=”hidden” animate=”show” variants={fadeUp} className=”text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6”>
+            <span className=”gold-text”>The DNA of Excellence</span>
           </motion.div>
           <motion.h1
-            initial="hidden" animate="show" custom={1} variants={fadeUp}
-            className="font-display text-[14vw] sm:text-[10vw] lg:text-[7.5vw] leading-[0.95] tracking-tight"
+            initial=”hidden” animate=”show” custom={1} variants={fadeUp}
+            className=”font-display text-[clamp(3.5rem,14vw,8rem)] sm:text-[10vw] lg:text-[7.5vw] leading-[0.95] tracking-tight”
           >
             Dr. Arjun<br />
-            <span className="italic gold-text">Rao</span>
+            <span className=”italic gold-text”>Rao</span>
           </motion.h1>
-          <motion.p initial="hidden" animate="show" custom={2} variants={fadeUp} className="mt-8 text-base md:text-lg text-muted-foreground max-w-xl">
+          <motion.p initial=”hidden” animate=”show” custom={2} variants={fadeUp} className=”mt-6 text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl”>
             Internal Medicine Specialist — 15+ years of excellence in diabetes, hypertension, thyroid, and preventive care.
           </motion.p>
-          <motion.p initial="hidden" animate="show" custom={3} variants={fadeUp} className="mt-10 font-display italic text-xl md:text-2xl max-w-lg text-foreground/85">
+          <motion.p initial=”hidden” animate=”show” custom={3} variants={fadeUp} className=”mt-6 md:mt-10 font-display italic text-lg md:text-2xl max-w-lg text-foreground/85”>
             “Every life changed becomes part of the legacy.”
           </motion.p>
-          <motion.div initial="hidden" animate="show" custom={4} variants={fadeUp} className="mt-10 flex flex-wrap gap-3">
-            <a href="#consult" className="group relative inline-flex items-center gap-3 rounded-full bg-foreground text-background px-7 py-3.5 text-sm tracking-[0.2em] uppercase hover:opacity-90 transition">
+          <motion.div initial=”hidden” animate=”show” custom={4} variants={fadeUp} className=”mt-8 md:mt-10 flex flex-wrap gap-3”>
+            <a href=”#consult” className=”group relative inline-flex items-center gap-3 rounded-full bg-foreground text-background px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm tracking-[0.2em] uppercase hover:opacity-90 transition”>
               Book Consultation
-              <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+              <span className=”inline-block transition-transform group-hover:translate-x-1”>→</span>
             </a>
-            <a href="#foundation" className="inline-flex items-center gap-3 rounded-full glass px-7 py-3.5 text-sm tracking-[0.2em] uppercase hover:bg-foreground/5 transition">
+            <a href=”#foundation” className=”inline-flex items-center gap-3 rounded-full glass px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm tracking-[0.2em] uppercase hover:bg-foreground/5 transition”>
               Explore Journey
             </a>
           </motion.div>
@@ -142,20 +194,20 @@ function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-          className="lg:col-span-5 relative"
+          className=”lg:col-span-5 relative”
         >
-          <div className="relative aspect-[3/4] max-w-md mx-auto">
-            <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-gold/30 via-transparent to-helix-b/20 blur-2xl" />
-            <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] glass">
+          <div className=”relative aspect-[3/4] max-w-[320px] sm:max-w-md mx-auto”>
+            <div className=”absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-gold/30 via-transparent to-helix-b/20 blur-2xl” />
+            <div className=”relative h-full w-full overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] glass”>
               <img
                 src={doctorPortrait}
-                alt="Dr. Arjun Rao, Internal Medicine Specialist"
-                className="h-full w-full object-cover"
+                alt=”Dr. Arjun Rao, Internal Medicine Specialist”
+                className=”h-full w-full object-cover”
                 width={896} height={1152}
               />
-              <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-background/95 to-transparent">
-                <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">MBBS · MD Internal Medicine</div>
-                <div className="font-display text-lg mt-1">Dr. Arjun Rao</div>
+              <div className=”absolute inset-x-0 bottom-0 p-4 sm:p-5 bg-gradient-to-t from-background/95 to-transparent”>
+                <div className=”text-[10px] tracking-[0.3em] uppercase text-muted-foreground”>MBBS · MD Internal Medicine</div>
+                <div className=”font-display text-base sm:text-lg mt-1”>Dr. Arjun Rao</div>
               </div>
             </div>
           </div>
@@ -177,13 +229,13 @@ function FoundationSection() {
     { year: "2020", title: "Fellowship", org: "Preventive & Lifestyle Medicine", note: "Modern integrative care", img: edu4 },
   ];
   return (
-    <section id="foundation" className="relative py-32 px-6 lg:px-10">
+    <section id="foundation" className="relative py-20 md:py-32 px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="02" title="The Foundation" />
-        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-5xl md:text-7xl max-w-4xl">
+        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-4xl md:text-7xl max-w-4xl">
           Each strand begins with <span className="italic gold-text">knowledge</span>.
         </motion.h2>
-        <div className="mt-20 grid md:grid-cols-2 gap-6">
+        <div className="mt-12 md:mt-20 grid md:grid-cols-2 gap-6">
           {items.map((it, i) => (
             <motion.div
               key={it.year}
@@ -195,7 +247,7 @@ function FoundationSection() {
                 <img src={it.img} alt={it.title} loading="lazy" width={800} height={500}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
-              <div className="p-8">
+              <div className="p-5 sm:p-8">
                 <div className="flex items-baseline justify-between">
                   <span className="font-mono text-xs tracking-widest gold-text">{it.year}</span>
                   <span className="size-2 rounded-full bg-gold shadow-[0_0_20px] shadow-gold/60" />
@@ -220,10 +272,10 @@ function EvolutionSection() {
     { k: "40+", v: "Conferences" },
   ];
   return (
-    <section className="relative py-32 px-6 lg:px-10">
+    <section className="relative py-20 md:py-32 px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="03" title="The Evolution" />
-        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-5xl md:text-7xl max-w-4xl">
+        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-4xl md:text-7xl max-w-4xl">
           A career composed in <span className="italic gold-text">precision</span>.
         </motion.h2>
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-foreground/10 rounded-2xl overflow-hidden glass">
@@ -253,19 +305,19 @@ function ExpertiseSection() {
     { t: "General Consultation", d: "Comprehensive adult internal medicine consultation." },
   ];
   return (
-    <section id="expertise" className="relative py-32 px-6 lg:px-10">
+    <section id="expertise" className="relative py-20 md:py-32 px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="04" title="Areas of Expertise" />
-        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-5xl md:text-7xl max-w-4xl">
+        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-4xl md:text-7xl max-w-4xl">
           Six branches. <span className="italic gold-text">One philosophy.</span>
         </motion.h2>
-        <div className="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-12 md:mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((it, i) => (
             <motion.div
               key={it.t}
               initial="hidden" whileInView="show" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp} custom={i}
-              className="group glass rounded-2xl p-8 relative overflow-hidden hover:bg-muted transition"
+              className="group glass rounded-2xl p-6 sm:p-8 relative overflow-hidden hover:bg-muted transition"
             >
               <div className="absolute -top-20 -right-20 size-40 rounded-full bg-gold/15 blur-3xl opacity-0 group-hover:opacity-100 transition" />
               <div className="font-mono text-xs gold-text">0{i + 1}</div>
@@ -290,13 +342,13 @@ function ResearchSection() {
     { t: "Preventive Care Models in Urban India", j: "Public Health Today", y: "2019" },
   ];
   return (
-    <section className="relative py-32 px-6 lg:px-10">
+    <section className="relative py-20 md:py-32 px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="05" title="Research & Knowledge" />
-        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-5xl md:text-7xl max-w-4xl">
+        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-4xl md:text-7xl max-w-4xl">
           Inquiry as a <span className="italic gold-text">practice</span>.
         </motion.h2>
-        <div className="mt-20 grid lg:grid-cols-5 gap-6">
+        <div className="mt-12 md:mt-20 grid lg:grid-cols-5 gap-6">
           <motion.div
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="lg:col-span-2 glass rounded-2xl overflow-hidden"
@@ -336,13 +388,13 @@ function ImpactSection() {
     { k: "4.9", v: "Average Rating" },
   ];
   return (
-    <section id="impact" className="relative py-40 px-6 lg:px-10">
+    <section id="impact" className="relative py-24 md:py-40 px-6 lg:px-10">
       <div className="mx-auto max-w-7xl text-center">
         <SectionLabel index="06" title="Patient Impact" />
-        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-5xl md:text-8xl max-w-5xl mx-auto leading-[0.95]">
+        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-4xl md:text-8xl max-w-5xl mx-auto leading-[0.95]">
           Every particle is a <span className="italic gold-text">life</span>.
         </motion.h2>
-        <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-10">
+        <div className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
           {stats.map((s, i) => (
             <motion.div key={s.v} initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={i}>
               <div className="font-display text-5xl md:text-7xl gold-text">{s.k}</div>
@@ -363,13 +415,13 @@ function AwardsSection() {
     { t: "Patient Choice Award", y: "2020", org: "Practo Health", img: award4 },
   ];
   return (
-    <section className="relative py-32 px-6 lg:px-10">
+    <section className="relative py-20 md:py-32 px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="07" title="Awards & Recognition" />
-        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-5xl md:text-7xl max-w-4xl">
+        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-4xl md:text-7xl max-w-4xl">
           A quiet wall of <span className="italic gold-text">trust</span>.
         </motion.h2>
-        <div className="mt-20 grid md:grid-cols-2 gap-6">
+        <div className="mt-12 md:mt-20 grid md:grid-cols-2 gap-6">
           {awards.map((a, i) => (
             <motion.div
               key={a.t}
@@ -381,7 +433,7 @@ function AwardsSection() {
                   <img src={a.img} alt={a.t} loading="lazy" width={400} height={400}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
-                <div className="col-span-3 p-7 flex flex-col justify-center">
+                <div className="col-span-3 p-4 sm:p-7 flex flex-col justify-center">
                   <div className="font-mono text-xs gold-text">{a.y}</div>
                   <div className="mt-3 font-display text-xl leading-snug">{a.t}</div>
                   <div className="text-sm text-muted-foreground mt-2">{a.org}</div>
@@ -402,18 +454,18 @@ function StoriesSection() {
     { n: "Anil M.", c: "Preventive Healthcare", q: "His annual screening caught something early. It changed my family's future.", img: patient3 },
   ];
   return (
-    <section className="relative py-32 px-6 lg:px-10">
+    <section className="relative py-20 md:py-32 px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="08" title="Success Stories" />
-        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-5xl md:text-7xl max-w-4xl">
+        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-4xl md:text-7xl max-w-4xl">
           Stories from <span className="italic gold-text">the helix</span>.
         </motion.h2>
-        <div className="mt-20 grid md:grid-cols-3 gap-6">
+        <div className="mt-12 md:mt-20 grid md:grid-cols-3 gap-6">
           {stories.map((s, i) => (
             <motion.div
               key={s.n}
               initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={i}
-              className="glass rounded-2xl p-8 animate-float"
+              className="glass rounded-2xl p-5 sm:p-8 animate-float"
               style={{ animationDelay: `${i * 0.6}s` }}
             >
               <img src={s.img} alt={s.n} loading="lazy" width={120} height={120}
@@ -433,15 +485,15 @@ function StoriesSection() {
 
 function PhilosophySection() {
   return (
-    <section className="relative py-48 px-6 lg:px-10">
-      <div className="mx-auto max-w-4xl text-center">
-        <SectionLabel index="09" title="The Philosophy" />
+    <section className=”relative py-24 md:py-48 px-6 lg:px-10”>
+      <div className=”mx-auto max-w-4xl text-center”>
+        <SectionLabel index=”09” title=”The Philosophy” />
         <motion.blockquote
-          initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-          className="font-display text-3xl md:text-5xl leading-[1.2] italic text-foreground/95"
+          initial=”hidden” whileInView=”show” viewport={{ once: true }} variants={fadeUp}
+          className=”font-display text-2xl md:text-5xl leading-[1.2] italic text-foreground/95”
         >
-          “Medicine is not only about treating illness. <br className="hidden md:block" />
-          It is about helping people <span className="gold-text not-italic">live better lives</span>.”
+          “Medicine is not only about treating illness. <br className=”hidden md:block” />
+          It is about helping people <span className=”gold-text not-italic”>live better lives</span>.”
         </motion.blockquote>
         <motion.div
           initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={1}
@@ -464,13 +516,13 @@ function ShowcaseSection() {
     { t: "Research Lab", img: show6 },
   ];
   return (
-    <section className="relative py-32 px-6 lg:px-10">
+    <section className="relative py-20 md:py-32 px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="10" title="Personal Brand" />
-        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-5xl md:text-7xl max-w-4xl">
+        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-4xl md:text-7xl max-w-4xl">
           A life in <span className="italic gold-text">practice</span>.
         </motion.h2>
-        <div className="mt-20 grid md:grid-cols-3 gap-5">
+        <div className="mt-12 md:mt-20 grid md:grid-cols-3 gap-5">
           {items.map((it, i) => (
             <motion.div
               key={it.t}
@@ -499,12 +551,12 @@ function ShowcaseSection() {
 
 function ConsultSection() {
   return (
-    <section id="consult" className="relative py-32 px-6 lg:px-10">
+    <section id="consult" className="relative py-20 md:py-32 px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="11" title="Consultation" />
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-            <h2 className="font-display text-5xl md:text-7xl leading-[0.95]">
+            <h2 className="font-display text-4xl md:text-7xl leading-[0.95]">
               Schedule your <span className="italic gold-text">consultation</span>.
             </h2>
             <p className="mt-6 text-muted-foreground max-w-md">
@@ -528,7 +580,7 @@ function ConsultSection() {
           <motion.form
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={1}
             onSubmit={(e) => e.preventDefault()}
-            className="glass rounded-3xl p-8 md:p-10 space-y-5"
+            className="glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 space-y-5"
           >
             {[
               { l: "Full Name", t: "text", p: "Your full name" },
