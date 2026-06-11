@@ -143,16 +143,14 @@ function SectionLabel({ index, title }: { index: string; title: string }) {
 function StickyHelix({ scrollRef }: { scrollRef: { current: number } }) {
   return (
     <div className="fixed inset-0 pointer-events-none z-0">
-      {/* Soft glass tint so the helix sits "inside" a glass column */}
-      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[min(900px,90vw)] rounded-[1.5rem] md:rounded-[3rem]
-        bg-white/5 backdrop-blur-[2px] border border-foreground/10 shadow-[0_30px_120px_-40px_rgba(0,0,0,0.60)]" />
-      <div className="absolute inset-0 opacity-95">
+      {/* DNA helix at low opacity — ambient background texture, not the star */}
+      <div className="absolute inset-0 opacity-30">
         <Suspense fallback={null}>
           <DnaHelix className="h-full w-full" scrollProgress={scrollRef} />
         </Suspense>
       </div>
-      {/* Vignette to keep edges readable */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,var(--color-background)_85%)]" />
+      {/* Strong vignette: transparent centre shows a hint, edges fully masked */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_75%_at_50%_50%,transparent_0%,transparent_35%,var(--color-background)_88%)]" />
     </div>
   );
 }
@@ -649,7 +647,7 @@ function Index() {
       <ScrollProgress />
       <Nav />
       <StickyHelix scrollRef={scrollRef.current} />
-      <main className="relative z-10">
+      <main className="relative z-10 bg-background/50">
         <Hero />
         <FoundationSection />
         <EvolutionSection />
