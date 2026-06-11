@@ -160,31 +160,31 @@ function Hero() {
   const y = useTransform(scrollYProgress, [0, 0.2], [0, -60]);
   const opacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   return (
-    <section id=”top” className=”relative min-h-screen flex items-center pt-28 pb-20 px-6 lg:px-10”>
-      <motion.div style={{ y, opacity }} className=”mx-auto max-w-7xl w-full grid lg:grid-cols-12 gap-8 lg:gap-10 items-center”>
-        <div className=”lg:col-span-7”>
-          <motion.div initial=”hidden” animate=”show” variants={fadeUp} className=”text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6”>
-            <span className=”gold-text”>The DNA of Excellence</span>
+    <section id="top" className="relative min-h-screen flex items-center pt-28 pb-20 px-6 lg:px-10">
+      <motion.div style={{ y, opacity }} className="mx-auto max-w-7xl w-full grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <div className="lg:col-span-7">
+          <motion.div initial="hidden" animate="show" variants={fadeUp} className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6">
+            <span className="gold-text">The DNA of Excellence</span>
           </motion.div>
           <motion.h1
-            initial=”hidden” animate=”show” custom={1} variants={fadeUp}
-            className=”font-display text-[clamp(3.5rem,14vw,8rem)] sm:text-[10vw] lg:text-[7.5vw] leading-[0.95] tracking-tight”
+            initial="hidden" animate="show" custom={1} variants={fadeUp}
+            className="font-display text-[clamp(3.5rem,14vw,8rem)] sm:text-[10vw] lg:text-[7.5vw] leading-[0.95] tracking-tight"
           >
             Dr. Arjun<br />
-            <span className=”italic gold-text”>Rao</span>
+            <span className="italic gold-text">Rao</span>
           </motion.h1>
-          <motion.p initial=”hidden” animate=”show” custom={2} variants={fadeUp} className=”mt-6 text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl”>
+          <motion.p initial="hidden" animate="show" custom={2} variants={fadeUp} className="mt-6 text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl">
             Internal Medicine Specialist — 15+ years of excellence in diabetes, hypertension, thyroid, and preventive care.
           </motion.p>
-          <motion.p initial=”hidden” animate=”show” custom={3} variants={fadeUp} className=”mt-6 md:mt-10 font-display italic text-lg md:text-2xl max-w-lg text-foreground/85”>
+          <motion.p initial="hidden" animate="show" custom={3} variants={fadeUp} className="mt-6 md:mt-10 font-display italic text-lg md:text-2xl max-w-lg text-foreground/85">
             “Every life changed becomes part of the legacy.”
           </motion.p>
-          <motion.div initial=”hidden” animate=”show” custom={4} variants={fadeUp} className=”mt-8 md:mt-10 flex flex-wrap gap-3”>
-            <a href=”#consult” className=”group relative inline-flex items-center gap-3 rounded-full bg-foreground text-background px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm tracking-[0.2em] uppercase hover:opacity-90 transition”>
+          <motion.div initial="hidden" animate="show" custom={4} variants={fadeUp} className="mt-8 md:mt-10 flex flex-wrap gap-3">
+            <a href="#consult" className="group relative inline-flex items-center gap-3 rounded-full bg-foreground text-background px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm tracking-[0.2em] uppercase hover:opacity-90 transition">
               Book Consultation
-              <span className=”inline-block transition-transform group-hover:translate-x-1”>→</span>
+              <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
             </a>
-            <a href=”#foundation” className=”inline-flex items-center gap-3 rounded-full glass px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm tracking-[0.2em] uppercase hover:bg-foreground/5 transition”>
+            <a href="#foundation" className="inline-flex items-center gap-3 rounded-full glass px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm tracking-[0.2em] uppercase hover:bg-foreground/5 transition">
               Explore Journey
             </a>
           </motion.div>
@@ -192,20 +192,20 @@ function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-          className=”lg:col-span-5 relative”
+          className="lg:col-span-5 relative"
         >
-          <div className=”relative aspect-[3/4] max-w-[320px] sm:max-w-md mx-auto”>
-            <div className=”absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-gold/30 via-transparent to-helix-b/20 blur-2xl” />
-            <div className=”relative h-full w-full overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] glass”>
+          <div className="relative aspect-[3/4] max-w-[320px] sm:max-w-md mx-auto">
+            <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-gold/30 via-transparent to-helix-b/20 blur-2xl" />
+            <div className="relative h-full w-full overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] glass">
               <img
                 src={doctorPortrait}
-                alt=”Dr. Arjun Rao, Internal Medicine Specialist”
-                className=”h-full w-full object-cover”
+                alt="Dr. Arjun Rao, Internal Medicine Specialist"
+                className="h-full w-full object-cover"
                 width={896} height={1152}
               />
-              <div className=”absolute inset-x-0 bottom-0 p-4 sm:p-5 bg-gradient-to-t from-background/95 to-transparent”>
-                <div className=”text-[10px] tracking-[0.3em] uppercase text-muted-foreground”>MBBS · MD Internal Medicine</div>
-                <div className=”font-display text-base sm:text-lg mt-1”>Dr. Arjun Rao</div>
+              <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 bg-gradient-to-t from-background/95 to-transparent">
+                <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">MBBS · MD Internal Medicine</div>
+                <div className="font-display text-base sm:text-lg mt-1">Dr. Arjun Rao</div>
               </div>
             </div>
           </div>
@@ -483,15 +483,15 @@ function StoriesSection() {
 
 function PhilosophySection() {
   return (
-    <section className=”relative py-24 md:py-48 px-6 lg:px-10”>
-      <div className=”mx-auto max-w-4xl text-center”>
-        <SectionLabel index=”09” title=”The Philosophy” />
+    <section className="relative py-24 md:py-48 px-6 lg:px-10">
+      <div className="mx-auto max-w-4xl text-center">
+        <SectionLabel index="09" title="The Philosophy" />
         <motion.blockquote
-          initial=”hidden” whileInView=”show” viewport={{ once: true }} variants={fadeUp}
-          className=”font-display text-2xl md:text-5xl leading-[1.2] italic text-foreground/95”
+          initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+          className="font-display text-2xl md:text-5xl leading-[1.2] italic text-foreground/95"
         >
-          “Medicine is not only about treating illness. <br className=”hidden md:block” />
-          It is about helping people <span className=”gold-text not-italic”>live better lives</span>.”
+          “Medicine is not only about treating illness. <br className="hidden md:block" />
+          It is about helping people <span className="gold-text not-italic">live better lives</span>.”
         </motion.blockquote>
         <motion.div
           initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={1}
